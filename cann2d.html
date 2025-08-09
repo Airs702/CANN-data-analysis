@@ -1,0 +1,808 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2D CANN &#8212; CANN Data Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'cann2d';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="1D CANN" href="cann1d.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CANN Data Analysis</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Data Analysis
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="cann1d.html">1D CANN</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2D CANN</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Airs702/CANN-data-analysis" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Airs702/CANN-data-analysis/issues/new?title=Issue%20on%20page%20%2Fcann2d.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/cann2d.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2D CANN</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">方法简介</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-spikes">函数 1：get_spikes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1. 示意图</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2. 真实数据示例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3. 示例代码</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tda-vis">函数 2：<code class="docutils literal notranslate"><span class="pre">TDA_vis</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">功能</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">1. 分析流程</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">2. 示例代码</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">3. 输出示例</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bump-fit">函数 3：<code class="docutils literal notranslate"><span class="pre">bump_fit</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">功能</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">1. 示意流程</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">2. 示例代码</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">3. 输出示例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spike">Spike 预处理模块</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">降维与去噪模块</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tda">拓扑数据分析（TDA）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">持久同调解码</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bump">环面可视化与 bump 轨迹绘制</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="d-cann">
+<h1>2D CANN<a class="headerlink" href="#d-cann" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>方法简介<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>本章的分析重点在于探索真实生物脑中神经群体活动所呈现的结构特征，<br />
+特别是验证这些活动是否存在符合二维连续吸引子神经网络（2D CANN）动力学的低维拓扑结构。<br />
+通过 <strong>拓扑数据分析（Topological Data Analysis, TDA）</strong>，我们能够识别神经群体活动中可能存在的低维流形结构，例如环面（torus），<br />
+并进一步用可视化方法进行展示。</p>
+<blockquote>
+<div><p><strong>说明</strong>：本章节所有示意图均基于真实实验数据，数据来源于下列论文：<br />
+<em>Gardner et al., “Toroidal topology of population activity in grid cells”, Nature, 2021</em><br />
+DOI: <a class="reference external" href="https://doi.org/10.1038/s41586-021-04268-7">10.1038/s41586-021-04268-7</a></p>
+</div></blockquote>
+<p>本章方法具有以下特点：</p>
+<ol class="arabic simple">
+<li><p><strong>面向真实神经数据</strong></p>
+<ul class="simple">
+<li><p>输入数据为从小鼠内嗅皮层（Medial Entorhinal Cortex, MEC）记录的<strong>grid cell</strong> 神经元放电序列（spike train）。</p></li>
+<li><p>数据经过时间对齐和预处理后，可直接作为高维点云用于后续分析。</p></li>
+</ul>
+</li>
+<li><p><strong>功能模块清晰</strong></p>
+<ul class="simple">
+<li><p><strong>降维与可视化</strong>：<br />
+使用 <code class="docutils literal notranslate"><span class="pre">get_spikes</span></code> 将 spike train 转换为平滑高维点云，并可选择 PCA/UMAP 等方法降维，直观展示神经活动在低维空间的轨迹。</p></li>
+<li><p><strong>拓扑数据分析（TDA）</strong>：<br />
+使用 <code class="docutils literal notranslate"><span class="pre">TDAvis</span></code> 对高维点云进行持久同调分析（Persistent Homology），输出 H0/H1/H2 的 barcode 图，并可结合 shuffle 检验结构显著性。</p></li>
+<li><p><strong>环面 bump 可视化</strong>：<br />
+使用 <code class="docutils literal notranslate"><span class="pre">bump_fit</span></code> 将神经群体活动映射到二维环面 (torus)，生成随时间演化的 <strong>bump 动态轨迹</strong> 或 3D 环面 GIF，直观展示连续吸引子神经网络的动力学特征。</p></li>
+</ul>
+</li>
+</ol>
+<p>流程：</p>
+<ol class="arabic simple">
+<li><p>将实验 spike train 数据转换为高维点云；</p></li>
+<li><p>对高维点云进行拓扑数据分析（TDA）；</p></li>
+<li><p>绘制持久同调条形码图（barcode）。</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="get-spikes">
+<h2>函数 1：get_spikes<a class="headerlink" href="#get-spikes" title="Link to this heading">#</a></h2>
+<p><strong>功能</strong></p>
+<ul class="simple">
+<li><p>将实验数据的 spike train 转化为平滑高维点云；</p></li>
+<li><p>输出高维点云矩阵（<code class="docutils literal notranslate"><span class="pre">n_points</span> <span class="pre">×</span> <span class="pre">n_neurons</span></code>），可用于后续降维或拓扑分析。</p></li>
+</ul>
+<hr class="docutils" />
+<section id="id2">
+<h3>1. 示意图<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>下图展示了 <code class="docutils literal notranslate"><span class="pre">get_spikes</span></code> 的核心思想：从 spike train 出发，经过平滑得到各神经元的瞬时放电率（firing rates），并将每个时间点对应的 firing rates 组合为高维点云。</p>
+<p><strong>图1. Spike train → 高维点云示意</strong></p>
+<p><img alt="Spike train " src="_images/spiketrain.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="id3">
+<h3>2. 真实数据示例<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>以小鼠在 open field 实验中的 spike train 数据为例，通过 <code class="docutils literal notranslate"><span class="pre">get_spikes</span></code> 转换为高维点云后，用 <strong>UMAP</strong> 将其降至三维，得到如下结果。</p>
+<p><strong>图2. UMAP 三维投影可视化</strong></p>
+<p><img alt="UMAP 3D" src="_images/umap.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="id4">
+<h3>3. 示例代码<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">umap</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits.mplot3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">Axes3D</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_spikes</span>  
+
+<span class="c1"># Step 1: 从 npz 文件加载 spike train 并转换为高维点云</span>
+<span class="n">sspikes</span> <span class="o">=</span> <span class="n">get_spikes</span><span class="p">(</span><span class="n">npz_path</span><span class="p">,</span> <span class="n">speed0</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Step 2: UMAP 降维至 3D</span>
+<span class="n">reducer</span> <span class="o">=</span> <span class="n">umap</span><span class="o">.</span><span class="n">UMAP</span><span class="p">(</span>
+    <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+    <span class="n">min_dist</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">n_components</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+<span class="n">sspikes</span> <span class="o">=</span> <span class="n">sspikes</span><span class="p">[::</span><span class="mi">5</span><span class="p">]</span>  <span class="c1"># 下采样以加快可视化</span>
+
+<span class="n">embedding</span> <span class="o">=</span> <span class="n">reducer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">sspikes</span><span class="p">)</span>
+
+<span class="c1"># Step 3: 3D Visualization</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">embedding</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">embedding</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">embedding</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;UMAP projection (3D)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="tda-vis">
+<h2>函数 2：<code class="docutils literal notranslate"><span class="pre">TDA_vis</span></code><a class="headerlink" href="#tda-vis" title="Link to this heading">#</a></h2>
+<section id="id5">
+<h3>功能<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TDA_vis</span></code> 用于对高维神经元点云进行 <strong>拓扑数据分析 (TDA)</strong>；</p></li>
+<li><p>本方法采用 <strong>持续同调 (Persistent Homology)</strong>，用于捕捉点云在不同尺度下的拓扑特征，如连通分支 (H0)、环路 (H1) 和空腔 (H2)；</p></li>
+<li><p>输出可视化图包括 <strong>持久条形图 (barcode)</strong> 或 <strong>持久图 (persistence diagram)</strong>，用于观察环面或环结构等神经动力学特征。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id6">
+<h3>1. 分析流程<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>从 <code class="docutils literal notranslate"><span class="pre">get_spikes</span></code> 得到的高维点云开始；</p></li>
+<li><p>构建 <strong>Vietoris-Rips 复形</strong>；</p></li>
+<li><p>计算 <strong>持续同调</strong> 并生成持久图；</p></li>
+<li><p>输出结果可帮助验证神经活动是否形成环或环面等低维流形；</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="id7">
+<h3>2. 示例代码<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">TDAvis</span>
+<span class="n">persistence</span> <span class="o">=</span> <span class="n">TDAvis</span><span class="p">(</span><span class="n">npz_path</span><span class="p">,</span>
+           <span class="n">dim</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+           <span class="n">num_times</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+           <span class="n">speed0</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+           <span class="n">active_times</span><span class="o">=</span><span class="mi">15000</span><span class="p">,</span>
+           <span class="n">k</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+           <span class="n">n_points</span><span class="o">=</span><span class="mi">1200</span><span class="p">,</span>
+           <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;cosine&#39;</span><span class="p">,</span>
+           <span class="n">nbs</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+           <span class="n">maxdim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+           <span class="n">coeff</span><span class="o">=</span><span class="mi">47</span><span class="p">,</span>
+           <span class="n">bRoll</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+           <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+           <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id8">
+<h3>3. 输出示例<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<p>运行上述代码后，将得到 <strong>神经点云的持久图</strong>。<br />
+在持久图中：</p>
+<ul class="simple">
+<li><p><strong>H0</strong> 点表示连通分支的出现与消失；</p></li>
+<li><p><strong>H1</strong> 点表示环路（如一维环或环面）；</p></li>
+<li><p><strong>H2</strong> 点表示空腔（如环面内部的孔洞）。</p></li>
+</ul>
+<p><strong>图3. 持久同调可视化结果</strong></p>
+<p><img alt="TDA Persistent Diagram" src="_images/tda.png" /></p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="bump-fit">
+<h2>函数 3：<code class="docutils literal notranslate"><span class="pre">bump_fit</span></code><a class="headerlink" href="#bump-fit" title="Link to this heading">#</a></h2>
+<section id="id9">
+<h3>功能<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>对群体神经活动进行 <strong>bump 可视化</strong>；</p></li>
+<li><p>将 spike 数据投影到二维环面 (torus) 并进行平滑；</p></li>
+<li><p>可生成 3D 环面上的 bump 动画，用于直观展示神经群体活动的 <strong>连续吸引子动力学</strong>。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id10">
+<h3>1. 示意流程<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>对 spike train 进行窗口切片；</p></li>
+<li><p>在环面坐标上统计群体活动强度；</p></li>
+<li><p>使用平滑函数 <code class="docutils literal notranslate"><span class="pre">smooth_tuning_map</span></code> 生成连续 bump；</p></li>
+<li><p>将结果映射到 3D 环面并生成 GIF。</p></li>
+</ol>
+<p>本示例基于前一节的 <code class="docutils literal notranslate"><span class="pre">TDA_vis</span></code> 分析结果，利用 H1 的两条持久条形图 (barcode) 提供的环面拓扑信息，在环面上重建群体活动的 <strong>bump 移动路径</strong>，并进行可视化。</p>
+</section>
+<hr class="docutils" />
+<section id="id11">
+<h3>2. 示例代码<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_3d_bump_on_torus</span>
+
+<span class="n">plot_3d_bump_on_torus</span><span class="p">(</span>
+    <span class="n">decoding_path</span><span class="p">,</span> 
+    <span class="n">spike_path</span><span class="p">,</span> 
+    <span class="n">output_path</span><span class="o">=</span><span class="s1">&#39;torus_bump.gif&#39;</span><span class="p">,</span>
+    <span class="n">numangsint</span><span class="o">=</span><span class="mi">51</span><span class="p">,</span> 
+    <span class="n">r1</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> 
+    <span class="n">r2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> 
+    <span class="n">window_size</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+    <span class="n">frame_step</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> 
+    <span class="n">n_frames</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> 
+    <span class="n">fps</span><span class="o">=</span><span class="mi">5</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id12">
+<h3>3. 输出示例<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<p>运行上述代码后，将在 <strong>3D 环面</strong> 上生成随时间移动的 bump，可导出为 GIF 文件。</p>
+<p><strong>图4. 群体神经活动在环面上的 bump 动态可视化</strong></p>
+<p><img alt="Torus bump" src="_images/torus_bump_fixed.gif" /></p>
+<p>附录：代码函数概览（Function Overview）</p>
+<p>本分析中所使用的 Python 脚本 <code class="docutils literal notranslate"><span class="pre">brainpy.py</span></code> 中包含以下核心函数，涵盖从 spike train 预处理、拓扑数据分析到环面可视化的完整流程：</p>
+</section>
+<section id="spike">
+<h3>Spike 预处理模块<a class="headerlink" href="#spike" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>get_spikes</strong><br />
+将 spike train 数据转换为时间对齐矩阵，支持平滑与速度过滤。</p></li>
+<li><p><strong>load_pos</strong><br />
+计算并插值动物位置与速度信息。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id13">
+<h3>降维与去噪模块<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>pca</strong><br />
+使用主成分分析（PCA）对神经元活动进行降维。</p></li>
+<li><p><strong>sample_denoising</strong><br />
+使用基于密度的贪婪采样方法对高维点云进行降噪。</p></li>
+<li><p><strong>smooth_knn_dist</strong><br />
+平滑 kNN 距离，用于构建图结构的局部带宽。</p></li>
+<li><p><strong>compute_membership_strengths</strong><br />
+计算稀疏图中邻接点对的连接强度。</p></li>
+<li><p><strong>second_build</strong><br />
+在降噪后样本点中重建对称距离矩阵，用于 TDA 分析。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="tda">
+<h3>拓扑数据分析（TDA）<a class="headerlink" href="#tda" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>TDAvis</strong><br />
+完整执行从 spike 数据到拓扑分析的全过程，并输出持久图。</p></li>
+<li><p><strong>plot_barcode</strong><br />
+可视化拓扑持久图（H0, H1, H2）的条形码图。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id14">
+<h3>持久同调解码<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>decode_circular_coordinates</strong><br />
+利用 cohomology 结果对神经活动的 bump 位置进行圆环坐标解码。</p></li>
+<li><p><strong>get_coords</strong><br />
+使用 cocycle 信息重建圆形坐标表示。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="bump">
+<h3>环面可视化与 bump 轨迹绘制<a class="headerlink" href="#bump" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>plot_3d_bump_on_torus</strong><br />
+将 bump 动态活动映射到 3D 环面上，生成 GIF 可视化。</p></li>
+<li><p><strong>smooth_tuning_map</strong><br />
+平滑 bump 活动图，支持周期边界处理。</p></li>
+<li><p><strong>smooth_image</strong><br />
+对带有缺失值（NaN）的图像进行二维平滑和补全。</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="cann1d.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">1D CANN</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">方法简介</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-spikes">函数 1：get_spikes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1. 示意图</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2. 真实数据示例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3. 示例代码</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tda-vis">函数 2：<code class="docutils literal notranslate"><span class="pre">TDA_vis</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">功能</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">1. 分析流程</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">2. 示例代码</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">3. 输出示例</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bump-fit">函数 3：<code class="docutils literal notranslate"><span class="pre">bump_fit</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">功能</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">1. 示意流程</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">2. 示例代码</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">3. 输出示例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spike">Spike 预处理模块</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">降维与去噪模块</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tda">拓扑数据分析（TDA）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">持久同调解码</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bump">环面可视化与 bump 轨迹绘制</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Airs702
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
